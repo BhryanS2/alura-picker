@@ -1,12 +1,22 @@
 <template>
-  <h1>{{message}}</h1>
+<div>
+  <h1>{{titulo}}</h1>
+  <img :src="foto.url" :alt="foto.descricao" :title="foto.titulo">
+
+
+</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      message: "Hello Vue, testing"
+      titulo: "Alurapic",
+      foto: {
+        titulo: "Foto alura",
+        url: "https://picsum.photos/1200/600",
+        descricao: "Apenas uma forto aleatória"
+      },
     }
   }
 }
