@@ -1,14 +1,14 @@
 <template>
   <div class="card">
-    <div class="card__title">{{ foto.titulo }}</div>
-    <div class="card__content">
-      <img :src="foto.url" :alt="foto.titulo" class="card__image" />
-    </div>
+    <div class="card__title">{{ title }}</div>
+    <slot class="card__content"> </slot>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["title"]
+};
 </script>
 
 <style>
