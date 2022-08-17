@@ -1,6 +1,14 @@
 <template>
   <div class="container">
     <h1 class="title">{{ titulo }}</h1>
+
+    <input
+      type="search"
+      class="filter"
+      placeholder="Filtrar pelo título"
+      v-on:input="filtro = $event.target.value"
+    />
+
     <ul class="listImage">
       <li v-for="foto in fotos" v-bind:key="foto.url" class="listImage__item">
         <Card :title="foto.titulo">
@@ -20,7 +28,8 @@ export default {
   data() {
     return {
       titulo: "Alurapic",
-      fotos: []
+      fotos: [],
+      filtro: ""
     };
   },
   created() {
@@ -49,5 +58,16 @@ export default {
 
 .listImage__item {
   display: inline-block;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+}
+
+.filter {
+  width: 100%;
+  padding: 10px;
+  display: block;
 }
 </style>

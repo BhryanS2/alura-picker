@@ -32,9 +32,4 @@ export default {
   padding: 10px;
   text-transform: uppercase;
 }
-
-.card__image {
-  width: 100%;
-  height: 100%;
-}
 </style>
