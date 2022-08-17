@@ -10,7 +10,11 @@
     />
 
     <ul class="listImage">
-      <li v-for="foto in fotos" v-bind:key="foto.url" class="listImage__item">
+      <li
+        v-for="foto in fotosFiltradas"
+        v-bind:key="foto.url"
+        class="listImage__item"
+      >
         <Card :title="foto.titulo">
           <img :src="foto.url" :alt="foto.titulo" class="card__image" />
         </Card>
@@ -31,6 +35,13 @@ export default {
       fotos: [],
       filtro: ""
     };
+  },
+  computed: {
+    fotosFiltradas() {
+      if (!this.filtro) return this.fotos;
+      const regex = new RegExp(this.filtro, "i");
+      return this.fotos.filter(({ titulo }) => regex.test(titulo));
+    }
   },
   created() {
     const promise = this.$http.get("http://localhost:3000/v1/fotos");
