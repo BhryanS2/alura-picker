@@ -3,7 +3,12 @@
     <h1 class="title">{{ titulo }}</h1>
     <ul class="listImage">
       <li v-for="foto in fotos" v-bind:key="foto.url" class="listImage__item">
-        <img :src="foto.url" />
+        <div class="card">
+          <div class="card__title">{{ foto.titulo }}</div>
+          <div class="card__content">
+            <img :src="foto.url" :alt="foto.titulo" class="card__image" />
+          </div>
+        </div>
       </li>
     </ul>
   </div>
