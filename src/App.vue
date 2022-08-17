@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>{{ titulo }}</h1>
-    <ul>
-      <li v-for="foto in fotos" v-bind:key="foto.url">
+  <div class="container">
+    <h1 class="title">{{ titulo }}</h1>
+    <ul class="listImage">
+      <li v-for="foto in fotos" v-bind:key="foto.url" class="listImage__item">
         <img :src="foto.url" />
       </li>
     </ul>
@@ -26,4 +26,22 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  font-family: Helvetica, sans-serif;
+  width: 96%;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.listImage {
+  list-style: none;
+}
+
+.listImage__item {
+  display: inline-block;
+}
+</style>
