@@ -16,7 +16,7 @@
         class="listImage__item"
       >
         <Card :title="foto.titulo">
-          <img :src="foto.url" :alt="foto.titulo" class="card__image" />
+          <ImagemResponsiva :url="foto.url" :title="foto.titulo" />
         </Card>
       </li>
     </ul>
@@ -25,9 +25,11 @@
 
 <script>
 import Card from "./components/shared/card/index.vue";
+import ImagemResponsiva from "./components/shared/imagemResponsiva/index.vue";
 export default {
   components: {
-    Card
+    Card,
+    ImagemResponsiva: ImagemResponsiva
   },
   data() {
     return {
@@ -69,11 +71,6 @@ export default {
 
 .listImage__item {
   display: inline-block;
-}
-
-.card__image {
-  width: 100%;
-  height: 100%;
 }
 
 .filter {
