@@ -11,7 +11,7 @@
 
     <ul class="listImage">
       <li
-        v-for="foto in fotosFiltradas"
+        v-for="foto of fotosFiltradas"
         v-bind:key="foto.url"
         class="listImage__item"
       >
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     fotosFiltradas() {
-      if (!this.filtro) return this.fotos;
+      if (!this.filtro.trim().length) return this.fotos;
       const regex = new RegExp(this.filtro, "i");
       return this.fotos.filter(({ titulo }) => regex.test(titulo));
     }

@@ -1,13 +1,22 @@
 <template>
   <div class="card">
-    <div class="card__title">{{ title }}</div>
-    <slot class="card__content"> </slot>
+    <div class="card__title" @dblclick="visible = !visible">
+      {{ title }}
+    </div>
+    <div class="card__content" v-show="visible">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script scoped>
 export default {
-  props: ["title"]
+  props: ["title"],
+  data() {
+    return {
+      visible: true
+    };
+  }
 };
 </script>
 
