@@ -3,13 +3,15 @@
     <div class="card__title" @dblclick="visible = !visible">
       {{ title }}
     </div>
-    <div class="card__content" v-show="visible">
-      <slot></slot>
-    </div>
+    <transition name="card__fade">
+      <div class="card__content" v-show="visible">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
 </template>
 
-<script scoped>
+<script>
 export default {
   props: ["title"],
   data() {
@@ -20,7 +22,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   padding: 0 auto;
   border: solid 2px grey;
@@ -40,5 +42,19 @@ export default {
   margin: 0 0 15px 0;
   padding: 10px;
   text-transform: uppercase;
+}
+
+* {
+  box-shadow: 5px 5px 5px;
+}
+
+.card__fade-enter,
+.card__fade-leave-active {
+  opacity: 0;
+}
+
+.card__fade-enter-active,
+.card__fade-leave-active {
+  transition: opacity 0.4s;
 }
 </style>
