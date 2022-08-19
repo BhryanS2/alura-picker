@@ -1,55 +1,23 @@
 <template>
   <div class="container">
-    <h1 class="title">{{ titulo }}</h1>
-
-    <input
-      type="search"
-      class="filter"
-      placeholder="Filtrar pelo título"
-      v-on:input="filtro = $event.target.value"
-    />
-
-    <ul class="listImage">
-      <li
-        v-for="foto of fotosFiltradas"
-        v-bind:key="foto.url"
-        class="listImage__item"
-      >
-        <Card :title="foto.titulo">
-          <ImagemResponsiva :url="foto.url" :title="foto.titulo" />
-        </Card>
-      </li>
-    </ul>
+    <navbar :routes="routes"></navbar>
+    <transition name="page">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-import Card from "./components/shared/card/index.vue";
-import ImagemResponsiva from "./components/shared/imagemResponsiva/index.vue";
+import { routes } from "./routes";
+import menu from "./components/shared/menu/index.vue";
 export default {
   components: {
-    Card,
-    ImagemResponsiva: ImagemResponsiva
+    navbar: menu
   },
   data() {
     return {
-      titulo: "Alurapic",
-      fotos: [],
-      filtro: ""
+      routes
     };
-  },
-  computed: {
-    fotosFiltradas() {
-      if (!this.filtro.trim().length) return this.fotos;
-      const regex = new RegExp(this.filtro, "i");
-      return this.fotos.filter(({ titulo }) => regex.test(titulo));
-    }
-  },
-  created() {
-    const promise = this.$http.get("http://localhost:3000/v1/fotos");
-    promise.then(response => {
-      this.fotos = response.data;
-    });
   }
 };
 </script>
@@ -61,21 +29,13 @@ export default {
   margin: 0 auto;
 }
 
-.title {
-  text-align: center;
+.page-enter,
+.page-leave-active {
+  opacity: 0;
 }
 
-.listImage {
-  list-style: none;
-}
-
-.listImage__item {
-  display: inline-block;
-}
-
-.filter {
-  width: 100%;
-  padding: 10px;
-  display: block;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.4s;
 }
 </style>
