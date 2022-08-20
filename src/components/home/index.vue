@@ -17,6 +17,7 @@
       >
         <Card :title="foto.titulo">
           <ImagemResponsiva :url="foto.url" :title="foto.titulo" />
+          <ButtonComponent type="button" text="Remover" />
         </Card>
       </li>
     </ul>
@@ -26,10 +27,13 @@
 <script>
 import Card from "../shared/card/index.vue";
 import ImagemResponsiva from "../shared/imagemResponsiva/index.vue";
+import Button from "../shared/button/index.vue";
+
 export default {
   components: {
     Card,
-    ImagemResponsiva: ImagemResponsiva
+    ImagemResponsiva: ImagemResponsiva,
+    ButtonComponent: Button
   },
   data() {
     return {
