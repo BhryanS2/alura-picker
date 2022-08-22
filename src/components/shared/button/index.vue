@@ -13,11 +13,13 @@ export default {
   props: {
     text: {
       type: String,
-      default: "Button"
+      default: "Button",
+      required: true
     },
     type: {
       type: "submit" | "reset" | "button" | "link",
-      default: "button"
+      default: "button",
+      required: <true></true>
     },
     confirmacao: {
       type: Boolean,
