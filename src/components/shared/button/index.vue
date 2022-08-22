@@ -1,5 +1,10 @@
 <template>
-  <button :type="type" class="btn btn__danger" @click="emitirEventoDeExlusao()">
+  <button
+    :type="type"
+    class="btn"
+    :class="classeBotao"
+    @click="emitirEventoDeExlusao()"
+  >
     {{ text }}
   </button>
 </template>
@@ -13,14 +18,28 @@ export default {
     type: {
       type: "submit" | "reset" | "button" | "link",
       default: "button"
+    },
+    confirmacao: {
+      type: Boolean,
+      default: false
+    },
+    estilo: {
+      type: "default" | "danger",
+      default: "default"
     }
   },
   methods: {
     emitirEventoDeExlusao() {
-      const confirmacao = confirm("Deseja realmente excluir?");
-      if (confirmacao) {
-        this.$emit("excluir");
+      if (this.confirmacao) {
+        if (!confirm("Deseja realmente excluir?")) return;
       }
+      this.$emit("excluir");
+    }
+  },
+  computed: {
+    classeBotao() {
+      const estilo = this.estilo === "default" ? "btn-default" : "btn-danger";
+      return estilo;
     }
   }
 };
@@ -34,12 +53,12 @@ export default {
   font-size: 1.2em;
 }
 
-.btn__danger {
+.btn-danger {
   background: firebrick;
   color: white;
 }
 
-.btn__default {
+.btn-default {
   background: darkcyan;
   color: white;
 }

@@ -20,6 +20,8 @@
           <ButtonComponent
             type="button"
             text="Remover"
+            :confirmacao="true"
+            estilo="danger"
             @excluir="excluirFoto(foto)"
           />
         </Card>
