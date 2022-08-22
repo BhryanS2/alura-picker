@@ -1,5 +1,5 @@
 <template>
-  <button :type="type" class="btn btn__danger">
+  <button :type="type" class="btn btn__danger" @click="emitirEventoDeExlusao()">
     {{ text }}
   </button>
 </template>
@@ -13,6 +13,14 @@ export default {
     type: {
       type: "submit" | "reset" | "button" | "link",
       default: "button"
+    }
+  },
+  methods: {
+    emitirEventoDeExlusao() {
+      const confirmacao = confirm("Deseja realmente excluir?");
+      if (confirmacao) {
+        this.$emit("excluir");
+      }
     }
   }
 };

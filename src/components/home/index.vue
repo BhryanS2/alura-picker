@@ -17,7 +17,11 @@
       >
         <Card :title="foto.titulo">
           <ImagemResponsiva :url="foto.url" :title="foto.titulo" />
-          <ButtonComponent type="button" text="Remover" />
+          <ButtonComponent
+            type="button"
+            text="Remover"
+            @excluir="excluirFoto(foto)"
+          />
         </Card>
       </li>
     </ul>
@@ -47,6 +51,12 @@ export default {
       if (!this.filtro.trim().length) return this.fotos;
       const regex = new RegExp(this.filtro, "i");
       return this.fotos.filter(({ titulo }) => regex.test(titulo));
+    }
+  },
+  methods: {
+    excluirFoto(foto) {
+      console.log(foto);
+      this.fotos.splice(this.fotos.indexOf(foto), 1);
     }
   },
   created() {
