@@ -57,4 +57,8 @@ export default {
 .card__fade-leave-active {
   transition: opacity 0.4s;
 }
+
+.card__content {
+  overflow: hidden;
+}
 </style>

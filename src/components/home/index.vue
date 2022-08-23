@@ -16,7 +16,11 @@
         class="listImage__item"
       >
         <Card :title="foto.titulo">
-          <ImagemResponsiva :url="foto.url" :title="foto.titulo" />
+          <ImagemResponsiva
+            :url="foto.url"
+            :title="foto.titulo"
+            v-meu-transform:rotate.animate="15"
+          />
           <ButtonComponent
             type="button"
             text="Remover"

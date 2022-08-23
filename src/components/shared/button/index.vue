@@ -19,7 +19,7 @@ export default {
     type: {
       type: "submit" | "reset" | "button" | "link",
       default: "button",
-      required: <true></true>
+      required: true
     },
     confirmacao: {
       type: Boolean,
