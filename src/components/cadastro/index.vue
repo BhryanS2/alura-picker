@@ -8,23 +8,17 @@
     <form @submit.prevent="cadastrar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input
-          id="titulo"
-          autocomplete="off"
-          @input="foto.titulo = $event.target.value"
-          :value="foto.titulo"
-        />
+        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo" />
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input
-          id="url"
-          autocomplete="off"
-          @input="foto.url = $event.target.value"
-          :value="foto.url"
+        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <imagem-responsiva
+          :url="foto.url"
+          :title="foto.titulo"
+          v-show="foto.url"
         />
-        <imagem-responsiva />
       </div>
 
       <div class="controle">
@@ -32,8 +26,7 @@
         <textarea
           id="descricao"
           autocomplete="off"
-          @input="foto.descricao = $event.target.value"
-          :value="foto.descricao"
+          v-model="foto.descricao"
         ></textarea>
       </div>
 
