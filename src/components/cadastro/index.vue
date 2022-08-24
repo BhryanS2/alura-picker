@@ -43,6 +43,7 @@
 <script>
 import ImagemResponsiva from "../shared/imagemResponsiva/index.vue";
 import Botao from "../shared/button/index.vue";
+import { Foto } from "../../domain/foto";
 
 export default {
   components: {
@@ -51,19 +52,12 @@ export default {
   },
   data() {
     return {
-      foto: {
-        titulo: "",
-        url: "",
-        descricao: ""
-      }
+      foto: new Foto()
     };
   },
   methods: {
     cadastrar() {
-      console.log(this.foto);
-      this.foto.titulo = "";
-      this.foto.url = "";
-      this.foto.descricao = "";
+      this.foto = new Foto();
     }
   }
 };
