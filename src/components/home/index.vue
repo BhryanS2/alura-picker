@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="title">{{ titulo }}</h1>
+    <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
 
     <input
       type="search"
@@ -49,7 +50,8 @@ export default {
     return {
       titulo: "Alurapic",
       fotos: [],
-      filtro: ""
+      filtro: "",
+      mensagem: ""
     };
   },
   computed: {
@@ -61,8 +63,16 @@ export default {
   },
   methods: {
     excluirFoto(foto) {
-      console.log(foto);
-      this.fotos.splice(this.fotos.indexOf(foto), 1);
+      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
+        () => {
+          // assim que apagar, exibe a mensagem para o usuário
+          this.mensagem = "Foto removida com sucesso";
+        },
+        err => {
+          this.mensagem = "Não foi possível remover a foto";
+          console.log(err);
+        }
+      );
     }
   },
   created() {
