@@ -63,22 +63,26 @@ export default {
   },
   methods: {
     excluirFoto(foto) {
-      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`).then(
-        () => {
-          // assim que apagar, exibe a mensagem para o usuário
-          this.mensagem = "Foto removida com sucesso";
-        },
-        err => {
-          this.mensagem = "Não foi possível remover a foto";
-          console.log(err);
-        }
-      );
+      this.resource
+        .delete({
+          id: foto._id
+        })
+        .then(
+          () => {
+            this.fotos = this.fotos.filter(f => f !== foto);
+            this.mensagem = "Foto removida com sucesso";
+          },
+          err => {
+            this.mensagem = "Não foi possível remover a foto";
+            console.log(err);
+          }
+        );
     }
   },
   created() {
-    const promise = this.$http.get("http://localhost:3000/v1/fotos");
-    promise.then(response => {
-      this.fotos = response.data;
+    this.resource = this.$resource("v1/fotos{/id}");
+    this.resource.query().then(({ data }) => {
+      this.fotos = data;
     });
   }
 };
