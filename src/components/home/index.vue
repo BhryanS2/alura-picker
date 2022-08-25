@@ -13,7 +13,7 @@
     <ul class="listImage">
       <li
         v-for="foto of fotosFiltradas"
-        v-bind:key="foto.url"
+        :key="foto._id"
         class="listImage__item"
       >
         <Card :title="foto.titulo">
