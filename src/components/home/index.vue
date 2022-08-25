@@ -22,6 +22,16 @@
             :title="foto.titulo"
             v-meu-transform:rotate.animate="15"
           />
+          <router-link
+            :to="{
+              name: 'alterar',
+              params: {
+                id: foto._id
+              }
+            }"
+          >
+            <Button-component type="button" text="Alterar" estilo="default" />
+          </router-link>
           <ButtonComponent
             type="button"
             text="Remover"
