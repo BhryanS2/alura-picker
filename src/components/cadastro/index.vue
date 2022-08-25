@@ -8,6 +8,8 @@
     <h2 v-if="this.$route.params.id" class="centralizado">Alterando</h2>
     <h2 v-else class="centralizado">Incluindo</h2>
 
+    <p v-show="this.mensagem" class="centralizado">{{ this.mensagem }}</p>
+
     <form @submit.prevent="cadastrar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
@@ -57,7 +59,8 @@ export default {
   data() {
     return {
       foto: new Foto(),
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      mensagem: ""
     };
   },
   methods: {
@@ -70,7 +73,9 @@ export default {
           }
           this.foto = new Foto();
         },
-        err => console.log(err)
+        err => {
+          this.mensagem = err.message;
+        }
       );
     }
   },
@@ -78,7 +83,10 @@ export default {
     this.fotoService = new FotoService(this.$resource);
     if (this.id) {
       const fotoPromise = this.fotoService.get(this.id);
-      fotoPromise.then(foto => (this.foto = foto));
+      fotoPromise.then(
+        foto => (this.foto = foto),
+        err => (this.mensagem = err.message)
+      );
     }
   }
 };

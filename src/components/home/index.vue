@@ -87,10 +87,13 @@ export default {
     }
   },
   created() {
+    this.mensagem = "";
     this.fotoService = new FotoService(this.$resource);
-    this.fotoService.list().then(({ data }) => {
-      this.fotos = data;
-    });
+    this.fotoService.list().then(
+      data => (this.fotos = data),
+      err => (this.mensagem = err.message),
+      () => (this.mensagem = null)
+    );
   }
 };
 </script>
