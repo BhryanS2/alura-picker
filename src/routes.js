@@ -5,11 +5,20 @@ export const routes = [
   {
     path: "/",
     component: Home,
-    name: "home"
+    name: "home",
+    titulo: "Home",
+    menu: true
   },
   {
     path: "/cadastro",
     component: Cadastro,
-    name: "cadastro"
+    name: "cadastro",
+    titulo: "Cadastro",
+    menu: true
+  },
+  {
+    path: "*",
+    component: Home,
+    menu: false
   }
 ];

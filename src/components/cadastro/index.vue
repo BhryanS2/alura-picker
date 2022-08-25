@@ -32,7 +32,7 @@
 
       <div class="centralizado">
         <meu-botao text="GRAVAR" type="submit" />
-        <router-link to="/"
+        <router-link :to="{ name: 'home' }"
           ><meu-botao text="VOLTAR" type="button"
         /></router-link>
       </div>
