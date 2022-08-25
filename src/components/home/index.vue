@@ -39,6 +39,7 @@
 import Card from "../shared/card/index.vue";
 import ImagemResponsiva from "../shared/imagemResponsiva/index.vue";
 import Button from "../shared/button/index.vue";
+import { FotoService } from "../../domain/foto/service";
 
 export default {
   components: {
@@ -63,25 +64,21 @@ export default {
   },
   methods: {
     excluirFoto(foto) {
-      this.resource
-        .delete({
-          id: foto._id
-        })
-        .then(
-          () => {
-            this.fotos = this.fotos.filter(f => f !== foto);
-            this.mensagem = "Foto removida com sucesso";
-          },
-          err => {
-            this.mensagem = "Não foi possível remover a foto";
-            console.log(err);
-          }
-        );
+      this.fotoService.delete(foto._id).then(
+        () => {
+          this.fotos = this.fotos.filter(f => f !== foto);
+          this.mensagem = "Foto removida com sucesso";
+        },
+        err => {
+          this.mensagem = "Não foi possível remover a foto";
+          console.log(err);
+        }
+      );
     }
   },
   created() {
-    this.resource = this.$resource("v1/fotos{/id}");
-    this.resource.query().then(({ data }) => {
+    this.fotoService = new FotoService(this.$resource);
+    this.fotoService.list().then(({ data }) => {
       this.fotos = data;
     });
   }

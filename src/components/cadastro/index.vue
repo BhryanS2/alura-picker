@@ -44,6 +44,7 @@
 import ImagemResponsiva from "../shared/imagemResponsiva/index.vue";
 import Botao from "../shared/button/index.vue";
 import { Foto } from "../../domain/foto";
+import { FotoService } from "../../domain/foto/service";
 
 export default {
   components: {
@@ -57,14 +58,14 @@ export default {
   },
   methods: {
     cadastrar() {
-      this.resource.save(this.foto).then(
+      this.fotoService.save(this.foto).then(
         () => (this.foto = new Foto()),
         err => console.log(err)
       );
     }
   },
   created() {
-    this.resource = this.$resource("v1/fotos");
+    this.fotoService = new FotoService(this.$resource);
   }
 };
 </script>
