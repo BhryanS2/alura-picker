@@ -13,12 +13,36 @@
     <form @submit.prevent="cadastrar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo" />
+        <input
+          name="titulo"
+          v-model.lazy="foto.titulo"
+          id="titulo"
+          autocomplete="off"
+          v-validate
+          data-vv-as="título"
+          data-vv-rules="required|min:3|max:30|alpha_spaces"
+          required
+        />
+        <span v-show="errors.has('titulo')" class="error">
+          {{ errors.first("titulo") }}
+        </span>
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <input
+          id="url"
+          name="url"
+          autocomplete="off"
+          v-model.lazy="foto.url"
+          v-validate
+          data-vv-as="URL"
+          data-vv-rules="required"
+          required
+        />
+        <span v-show="errors.has('url')" class="error">
+          {{ errors.first("url") }}
+        </span>
         <imagem-responsiva
           :url="foto.url"
           :title="foto.titulo"
@@ -65,17 +89,24 @@ export default {
   },
   methods: {
     cadastrar() {
-      this.fotoService.save(this.foto).then(
-        () => {
-          if (this.$route.params.id) {
-            this.$router.push({ name: "home" });
-            return;
-          }
-          this.foto = new Foto();
+      const validateAll = this.$validator.validateAll();
+
+      const fotoSave = this.fotoService.save(this.foto);
+      validateAll.then(
+        success => {
+          if (!success) return;
+          fotoSave.then(
+            () => {
+              if (this.$route.params.id) {
+                this.$router.push({ name: "home" });
+                return;
+              }
+              this.foto = new Foto();
+            },
+            err => (this.mensagem = err.message)
+          );
         },
-        err => {
-          this.mensagem = err.message;
-        }
+        error => (this.mensagem = "Preencha os campos obrigatórios")
       );
     }
   },
@@ -113,5 +144,9 @@ export default {
 
 .centralizado {
   text-align: center;
+}
+
+.error {
+  color: red;
 }
 </style>
