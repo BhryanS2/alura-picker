@@ -102,6 +102,10 @@ export default {
                 return;
               }
               this.foto = new Foto();
+              this.mensagem = "Foto cadastrada com sucesso!";
+              setTimeout(() => {
+                this.mensagem = "";
+              }, 3000);
             },
             err => (this.mensagem = err.message)
           );
