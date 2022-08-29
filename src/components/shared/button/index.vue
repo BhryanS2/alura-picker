@@ -46,17 +46,19 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
+$cor-perigo: #b22222;
 .btn {
   display: inline-block;
   padding: 10px;
   border-radius: 3px;
   margin: 10px;
   font-size: 1.2em;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-danger {
-  background: firebrick;
+  background: $cor-perigo;
   color: white;
 }
 
