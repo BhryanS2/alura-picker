@@ -46,24 +46,6 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-$cor-perigo: #b22222;
-.btn {
-  display: inline-block;
-  padding: 10px;
-  border-radius: 3px;
-  margin: 10px;
-  font-size: 1.2em;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-danger {
-  background: $cor-perigo;
-  color: white;
-}
-
-.btn-default {
-  background: darkcyan;
-  color: white;
-}
+<style lang="sass">
+@import url("./style.scss");
 </style>
